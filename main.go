@@ -65,6 +65,10 @@ func Request(w http.ResponseWriter, r *http.Request) {
 			http.StatusText(http.StatusNotFound),
 			http.StatusNotFound,
 		)
+
+		fmt.Println(err)
+
+		return
 	}
 
 	if proxyUrl, err := url.Parse(service); err != nil {
@@ -111,6 +115,8 @@ func getService(path string) (string, error) {
 	ip := ips[0].String()
 
 	address := fmt.Sprintf("http://%s:3000%s", ip, path)
+
+	fmt.Println(address)
 
 	return address, nil
 }
