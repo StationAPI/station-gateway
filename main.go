@@ -45,7 +45,7 @@ func main() {
 		Request(w, r)
 	})
 
-	http.ListenAndServe(":1338", r)
+	http.ListenAndServe(":3000", r)
 }
 
 type Redirect struct {
@@ -109,12 +109,14 @@ func getService(path string) (string, error) {
 	ips, err := net.LookupIP(dns)
 
 	if err != nil {
+		fmt.Println(err)
+
 		return "", errors.New("Address not found")
 	}
 
 	ip := ips[0].String()
 
-	address := fmt.Sprintf("http://%s:1338%s", ip, path)
+	address := fmt.Sprintf("http://%s:3000%s", ip, path)
 
 	fmt.Println(address)
 
